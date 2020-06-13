@@ -43,6 +43,6 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: rust/target/tar/docpars.tar.gz
+        file: target/tar/docpars.tar.gz
         tag: ${{ github.ref }}
         asset_name: docpars-${{ steps.get_version.outputs.VERSION }}-${{ matrix.target }}.tar.gz
