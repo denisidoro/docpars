@@ -13,3 +13,4 @@ dotrs="${DOTFILES}/target/dotrs"
 [ -f $dotrs ] || _create_dotrs_fallback
 
 dot sh scripting test "${DOCPARS_HOME}/tests"
+dot self test file '^bash \- help'
