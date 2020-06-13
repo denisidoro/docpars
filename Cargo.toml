@@ -1,0 +1,24 @@
+[package]
+name = "docpars"
+version = "0.1.0"
+authors = ["Denis Isidoro <denis_isidoro@live.com>"]
+edition = "2018"
+description = "Parser for command-line options, arguments and sub-commands"
+homepage = "https://github.com/denisidoro/docpars"
+documentation = "https://github.com/denisidoro/docpars"
+repository = "https://github.com/denisidoro/docpars"
+keywords = ["argument", "parser", "cli", "bash", "shell"]
+categories = ["command-line-utilities"]
+license = "Apache-2.0"
+
+[dependencies]
+docopt = "1"
+
+[lib]
+name = "docpars"
+path = "src/lib.rs"
+
+[[bin]]
+name = "docpars"
+path = "src/bin/main.rs"
+bench = false
