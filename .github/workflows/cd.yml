@@ -33,7 +33,9 @@ jobs:
         rust-version: stable
     - uses: actions/checkout@v1
     - name: Build
-      run: ./scripts/action release ${{ matrix.target }}
+      run: ./scripts/binary build --target ${{ matrix.target }}
+    - name: Tar
+      run: ./scripts/binary tar --target ${{ matrix.target }}
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
@@ -41,6 +43,6 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: target/tar/docpars.tar.gz
+        file: rust/target/tar/docpars.tar.gz
         tag: ${{ github.ref }}
         asset_name: docpars-${{ steps.get_version.outputs.VERSION }}-${{ matrix.target }}.tar.gz
