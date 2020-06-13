@@ -3,4 +3,13 @@ set -euo pipefail
 
 source "$(dirname "$0")/core.sh"
 
+_create_dotrs_fallback() {
+    mkdir -p "$(dirname "$dotrs")" || true
+    local content="$(cat "$0"; echo "Stub"; echo; echo "Usage:"; echo "    dotrs")"
+    echo "$content" > "$dotrs"
+}
+
+dotrs="${DOTFILES}/target/dotrs"
+[ -f $dotrs ] || _create_dotrs_fallback
+
 dot sh scripting test "${DOCPARS_HOME}/tests"
