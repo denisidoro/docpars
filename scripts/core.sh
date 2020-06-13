@@ -13,13 +13,13 @@ dot::install_if_necessary() {
 parse::python() {
    local -r msg="$1"
    shift
-   "${DOTFILES}/scripts/core/docopts" -h "$msg" : "$@"
+   "$DOCOPT_BIN" -h "$msg" : "$@"
 }
 
 parse::docpars() {
    local -r msg="$1"
    shift
-   "${DOCPARS_HOME}/scripts/run" -h "$msg" : "$@"
+   "$DOCPARS_BIN" -h "$msg" : "$@"
 }
 
 parse::compare() {
@@ -34,4 +34,9 @@ fixture::get() {
 
 export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
 export DOT_DOCOPT="${DOCPARS_HOME}/target/debug/docpars"
+
 dot::install_if_necessary
+
+export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
+export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"
+[ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/scripts/run"
