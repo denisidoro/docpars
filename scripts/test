@@ -6,12 +6,12 @@ source "$(dirname "$0")/core.sh"
 _create_file() {
     local -r content="$1"
     local -r filename="$2"
+    mkdir -p "$(dirname "$filename")" || true
     echo "$content" > "$filename"
     chmod +x "$filename"
 }
 
 _create_dotrs_fallback() {
-    mkdir -p "$(dirname "$dotrs")" || true
     local content="$(echo "Stub"; echo; echo "Usage:"; echo "    dotrs")"
     _create_file "$content" "$dotrs"
     _create_file "$content" "${DOTFILES}/target/release/dotrs"
