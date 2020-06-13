@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-export DOCPARS_HOME="$(cd "$(dirname "$0")/.." && pwd)"
-source "${DOCPARS_HOME}/scripts/core.sh"
-
-dot rust action "$@"

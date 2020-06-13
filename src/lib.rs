@@ -5,12 +5,12 @@ use std::error::Error;
 
 fn key_string(x: &str) -> &str {
     if x.starts_with("--") {
-        return &x[2..];
-    } else if x.starts_with("<") {
+        &x[2..]
+    } else if x.starts_with('<') {
         let l = x.len();
-        return &x[1..(l - 1)];
+        &x[1..(l - 1)]
     } else {
-        return x;
+        x
     }
 }
 
@@ -24,7 +24,7 @@ fn value_string(x: &Value) -> String {
         },
         List(v) => {
             let mut s = String::from("(");
-            let quoted_values: Vec<String> = v.into_iter().map(|y| format!("'{}'", y)).collect();
+            let quoted_values: Vec<String> = v.iter().map(|y| format!("'{}'", y)).collect();
             s.push_str(&quoted_values.join(" "));
             s.push_str(")");
             s
@@ -42,7 +42,7 @@ pub fn gen_eval_string(args: &mut env::Args) -> Result<(), Box<dyn Error>> {
 
     // handle --help
     let mut first_arg: Option<String> = None;
-    if let Some(x) = args.nth(0) {
+    if let Some(x) = args.next() {
         first_arg = Some(x.clone());
         match x.as_str() {
             "--help" | "-h" => {

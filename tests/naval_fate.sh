@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "${DOCPARS_HOME}/tests/aux/core.sh"
+source "${DOCPARS_HOME}/scripts/core.sh"
 
 _t() {
    local -r msg="$1"

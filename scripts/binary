@@ -3,4 +3,4 @@ set -euo pipefail
 
 source "$(dirname "$0")/core.sh"
 
-PROJ_HOME="$DOCPARS_HOME" PROJ_NAME="docpars" dot rust run "$@"
+dot rust binary "$@"
