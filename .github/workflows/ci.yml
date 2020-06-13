@@ -43,6 +43,12 @@ jobs:
           toolchain: stable
           override: true
 
+      - name: Run cargo build
+        uses: actions-rs/cargo@v1
+        continue-on-error: false
+        with:
+          command: build
+
       - name: Run cargo test
         uses: actions-rs/cargo@v1
         continue-on-error: false
@@ -50,7 +56,7 @@ jobs:
           command: test
 
       - name: Run bash tests
-        run: ls -la; ls -la target; ls -la target/debug; ./scripts/test
+        run: ./scripts/test
 
   lints:
     name: Lints
