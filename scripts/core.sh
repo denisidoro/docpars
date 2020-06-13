@@ -8,7 +8,7 @@ dot::install_if_necessary() {
     export PATH="${DOTFILES}/bin:${PATH}"
     git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
     cd "$DOTFILES"
-    git checkout "$DOTFILES_COMMIT_HASH"
+    git checkout "$DOTFILES_COMMIT_HASH" 2>/dev/null || true
 }
 
 parse::python() {
@@ -33,5 +33,6 @@ fixture::get() {
    cat "${DOCPARS_HOME}/tests/docs/${1}.txt"
 }
 
-export DOT_DOCOPT="${DOT_DOCOPT:-"${DOCPARS_HOME}/target/debug/docpars"}"
+echo "DOCPARS_HOME: $DOCPARS_HOME"
+export DOT_DOCOPT="${DOCPARS_HOME}/target/debug/docpars"
 dot::install_if_necessary
