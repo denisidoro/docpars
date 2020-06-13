@@ -2,12 +2,16 @@
 
 DOTFILES_COMMIT_HASH="bc74f8"
 
+dot::clone() {
+    git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
+    cd "$DOTFILES" && git checkout "$DOTFILES_COMMIT_HASH"
+}
+
 dot::install_if_necessary() {
     [ -n "${DOTFILES:-}" ] && return
     export DOTFILES="${DOCPARS_HOME}/dotfiles"
     export PATH="${DOTFILES}/bin:${PATH}"
-    git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
-    $(cd "$DOTFILES" && git checkout "$DOTFILES_COMMIT_HASH" 2>/dev/null || true)
+    $(dot::clone 2>/dev/null || true)
 }
 
 parse::python() {
