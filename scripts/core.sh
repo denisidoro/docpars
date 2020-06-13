@@ -33,10 +33,10 @@ fixture::get() {
 }
 
 export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
-export DOT_DOCOPT="${DOCPARS_HOME}/target/debug/docpars"
 
 dot::install_if_necessary
 
 export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
 export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"
+[ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/target/debug/docpars"
 [ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/scripts/run"
