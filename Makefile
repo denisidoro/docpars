@@ -1,5 +1,5 @@
 install:
-	scripts/make install
+	scripts/binary install
 
 uninstall:
-	scripts/make uninstall
+	scripts/binary uninstall
