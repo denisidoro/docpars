@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-export DOCPARS_HOME="$(cd "$(dirname "$0")/.." && pwd)"
-source "${DOCPARS_HOME}/scripts/core.sh"
+source "$(dirname "$0")/core.sh"
 
 dot rust action "$@"
