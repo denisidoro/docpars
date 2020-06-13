@@ -9,4 +9,5 @@ dot::install_if_necessary() {
     git checkout "bc74f8"
 }
 
+export DOT_DOCOPT="${DOT_DOCOPT:-"${DOCPARS_HOME}/target/debug/docpars"}"
 dot::install_if_necessary
