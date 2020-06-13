@@ -50,7 +50,7 @@ jobs:
           command: test
 
       - name: Run bash tests
-        run: ./scripts/test
+        run: ls -la; ls -la target; ls -la target/debug; ./scripts/test
 
   lints:
     name: Lints

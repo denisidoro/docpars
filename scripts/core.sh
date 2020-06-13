@@ -32,6 +32,6 @@ fixture::get() {
    cat "${DOCPARS_HOME}/tests/docs/${1}.txt"
 }
 
-export DOCPARS_HOME="$(echo "${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}" | sed 's|docpars/docpars|docpars|')"
+export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
 export DOT_DOCOPT="${DOCPARS_HOME}/target/debug/docpars"
 dot::install_if_necessary
