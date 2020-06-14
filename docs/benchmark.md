@@ -1,6 +1,6 @@
 ### Benchmark
 
-This was run on a 2018 Macbook Pro using docpars 0.2.0.
+[This](https://github.com/denisidoro/docpars/blob/e96b54e7ec8aeaa55c40181ac2ee6003415c2bce/tests/benchmark.sh) was run on a 2018 Macbook Pro using docpars 0.2.0.
 
 | Script | Time (mean ± σ) | Range (min … max) | Runs | 
 | --- | --- | --- | --- | 
