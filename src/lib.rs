@@ -53,7 +53,7 @@ fn get_data(argv: &Vec<String>) -> Result<Data, Box<dyn Error>> {
     }
     match argv.get(3).as_ref().map(|s| s.as_str()) {
         Some("--help") | Some("-h") => Ok(Data::Help(help_msg)),
-        _ => return Ok(Data::Parse(help_msg, &argv[2..])),
+        _ => Ok(Data::Parse(help_msg, &argv[2..])),
     }
 }
 
