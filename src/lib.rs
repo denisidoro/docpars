@@ -37,7 +37,7 @@ enum Data<'a> {
     Parse(String, &'a [String]),
 }
 
-fn get_data(argv: &Vec<String>) -> Result<Data, Box<dyn Error>> {
+fn get_data(argv: &[String]) -> Result<Data, Box<dyn Error>> {
     match argv.get(0).as_ref().map(|s| s.as_str()) {
         Some("--help") | Some("-h") => {}
         _ => return Ok(Data::Unknown),
@@ -57,7 +57,7 @@ fn get_data(argv: &Vec<String>) -> Result<Data, Box<dyn Error>> {
     }
 }
 
-pub fn gen_eval_string(argv: &Vec<String>) -> Result<(), Box<dyn Error>> {
+pub fn gen_eval_string(argv: &[String]) -> Result<(), Box<dyn Error>> {
     let data = get_data(argv)?;
 
     match data {
