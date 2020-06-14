@@ -14,6 +14,7 @@ _msg() {
 
 _run_compare() {
    local -r msg="$(_msg)"
+   _t "$msg"
    _t "$msg" ship new foo
    _t "$msg" ship new foo bar
    _t "$msg" ship foo move 10 20
@@ -23,7 +24,7 @@ _run_compare() {
    _t "$msg" mine set 2 4
    _t "$msg" mine set 2 4 --moored
    _t "$msg" mine remove 2 4 --moored
-   # _t "$msg" --version
+   test::skip "--version" parse::compare "$msg" "--version"
 }
 
 _run_help() {

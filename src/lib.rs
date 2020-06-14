@@ -1,6 +1,5 @@
 use docopt::Docopt;
 use docopt::Value::{self, Counted, List, Plain, Switch};
-use std::env;
 use std::error::Error;
 
 fn key_string(x: &str) -> &str {
@@ -32,47 +31,57 @@ fn value_string(x: &Value) -> String {
     }
 }
 
-pub fn gen_eval_string(args: &mut env::Args) -> Result<(), Box<dyn Error>> {
-    // get help message
-    let error_message = "Usage: docpars -h <docopt> : <args>...";
-    args.next().ok_or(error_message)?;
-    args.next().ok_or(error_message)?;
-    let help_message = args.next().ok_or(error_message)?;
-    args.next().ok_or(error_message)?;
+enum Data<'a> {
+    Unknown,
+    Help(String),
+    Parse(String, &'a [String]),
+}
 
-    // handle --help
-    let mut first_arg: Option<String> = None;
-    if let Some(x) = args.next() {
-        first_arg = Some(x.clone());
-        match x.as_str() {
-            "--help" | "-h" => {
-                println!(
-                    r#"cat << DOCPARSEOF
+fn get_data(argv: &Vec<String>) -> Result<Data, Box<dyn Error>> {
+    match argv.get(0).as_ref().map(|s| s.as_str()) {
+        Some("--help") | Some("-h") => {}
+        _ => return Ok(Data::Unknown),
+    }
+    let help_msg: String;
+    match argv.get(1) {
+        Some(msg) => help_msg = msg.to_owned(),
+        _ => return Ok(Data::Unknown),
+    }
+    match argv.get(2).as_ref().map(|s| s.as_str()) {
+        Some(":") => {}
+        _ => return Ok(Data::Unknown),
+    }
+    match argv.get(3).as_ref().map(|s| s.as_str()) {
+        Some("--help") | Some("-h") => Ok(Data::Help(help_msg)),
+        _ => return Ok(Data::Parse(help_msg, &argv[2..])),
+    }
+}
+
+pub fn gen_eval_string(argv: &Vec<String>) -> Result<(), Box<dyn Error>> {
+    let data = get_data(argv)?;
+
+    match data {
+        Data::Help(msg) => {
+            println!(
+                r#"cat << DOCPARSEOF
 {}
 DOCPARSEOF
                 exit 0"#,
-                    help_message
-                );
-                return Ok(());
+                msg
+            );
+        }
+        Data::Parse(msg, args) => {
+            let parsed_args = Docopt::new(msg)
+                .and_then(|d| d.argv(args).parse())
+                .unwrap_or_else(|e| e.exit());
+
+            for (k, v) in parsed_args.map.iter() {
+                println!("{}={}", key_string(k).replace("-", "_"), value_string(v));
             }
-            _ => {}
+        }
+        _ => {
+            println!("Usage: docpars -h <docopt> : <args>...");
         }
     }
-    let semicolon = String::from(":");
-    let v = match first_arg {
-        Some(x) => vec![semicolon, x],
-        None => vec![semicolon],
-    };
-    let args = v.into_iter().chain(args);
-
-    // parse argv and exit the program with an error message if it fails
-    let parsed_args = Docopt::new(help_message)
-        .and_then(|d| d.argv(args).parse())
-        .unwrap_or_else(|e| e.exit());
-
-    for (k, v) in parsed_args.map.iter() {
-        println!("{}={}", key_string(k), value_string(v));
-    }
-
     Ok(())
 }

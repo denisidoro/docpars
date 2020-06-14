@@ -37,8 +37,10 @@ fixture::get() {
 }
 
 export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
+export PYTHONDONTWRITEBYTECODE=x
 
 dot::install_if_necessary
+source "${DOTFILES}/scripts/core/main.sh"
 
 export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
 export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"
