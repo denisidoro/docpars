@@ -1,5 +1,5 @@
-# docpars <img src="https://user-images.githubusercontent.com/3226564/65362934-b4432500-dbdf-11e9-8f75-815fbc5cbf8f.png" alt="icon" height="28px"/> [![Actions Status](https://github.com/denisidoro/docpars/workflows/Tests/badge.svg)](https://github.com/denisidoro/docpars/actions) ![GitHub release](https://img.shields.io/github/v/release/denisidoro/docpars?include_prereleases)
-  
+# docpars [![Actions Status](https://github.com/denisidoro/docpars/workflows/CI/badge.svg)](https://github.com/denisidoro/docpars/actions) ![GitHub release](https://img.shields.io/github/v/release/denisidoro/docpars?include_prereleases)
+
 An ultra-fast parser for declarative command-line options for your shell scripts.
 
 It implements the [Docopt syntax](http://docopt.org/) and is written in Rust.
@@ -77,9 +77,9 @@ cargo install docpars
 
 ### Downloading pre-compiled binaries
 
-You can download pre-built binaries [here](https://github.com/denisidoro/docpars/releases/latest).
+You can download built binaries [here](https://github.com/denisidoro/docpars/releases/latest).
 
-There are binaries for OSX, Android and Linux with ARM and x86_64 variants.
+They are available for OSX, Android and Linux with ARM and x86_64 variants.
 
 ### Building from source
 
