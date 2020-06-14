@@ -29,7 +29,7 @@ If you run `coffee make --dark` for the following script...
 ##?     coffee make [--dark]
 ##?     coffee drink
 
-# This function could be included in a helper bash file 
+# This function can be included in a helper bash file 
 # and imported by all your scripts
 args::parse() {
    eval "$(/path/to/docpars -h "$(grep "^##?" "$0" | cut -c 5-)" : "$@")"
