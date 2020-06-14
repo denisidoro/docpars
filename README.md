@@ -50,9 +50,11 @@ Motivation
 ------------
 The [default implementation](https://github.com/docopt/docopts) of docopt for shell scripts use Python under the hood. You may want to use *docpars* instead in the following scenarios
 
-### You want portability
+### You don't want to install Python
 
 This may be the case of CI/CD instances, minimal docker containers or environments where you may want to run some scripts but aren't equipped with your whole dev arsenal, such as [Termux on Android](https://termux.com/) or [WSL on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+
+Instead of installing Python you can simply drop a ~1MB static binary.
 
 ### You want extreme performance
 
