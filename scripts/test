@@ -4,18 +4,18 @@ set -euo pipefail
 source "$(dirname "$0")/core.sh"
 
 _create_file() {
-    local -r content="$1"
-    local -r filename="$2"
-    mkdir -p "$(dirname "$filename")" || true
-    echo "$content" > "$filename"
-    chmod +x "$filename"
+   local -r content="$1"
+   local -r filename="$2"
+   mkdir -p "$(dirname "$filename")" || true
+   echo "$content" > "$filename"
+   chmod +x "$filename"
 }
 
 _create_dotrs_fallback() {
-    local content="echo \"$(echo "Stub"; echo; echo "Usage:"; echo "    dotrs")\""
-    _create_file "$content" "$dotrs"
-    _create_file "$content" "${DOTFILES}/target/release/dotrs"
-    _create_file "$content" "${DOTFILES}/rust/target/release/dotrs"
+   local content="echo \"$(echo "Stub"; echo; echo "Usage:"; echo "    dotrs")\""
+   _create_file "$content" "$dotrs"
+   _create_file "$content" "${DOTFILES}/target/release/dotrs"
+   _create_file "$content" "${DOTFILES}/rust/target/release/dotrs"
 }
 
 dotrs="${DOTFILES}/target/dotrs"

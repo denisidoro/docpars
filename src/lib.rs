@@ -73,7 +73,14 @@ DOCPARSEOF
         Data::Parse(msg, args) => {
             let parsed_args = Docopt::new(msg)
                 .and_then(|d| d.argv(args).parse())
-                .unwrap_or_else(|e| e.exit());
+                .unwrap_or_else(|e| {
+                    if e.fatal() {
+                        println!("exit 1");
+                        e.exit();
+                    } else {
+                        e.exit();
+                    }
+                });
 
             for (k, v) in parsed_args.map.iter() {
                 println!("{}={}", key_string(k).replace("-", "_"), value_string(v));

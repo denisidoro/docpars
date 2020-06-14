@@ -15,6 +15,7 @@ _msg() {
 _run_compare() {
    local -r msg="$(_msg)"
    _t "$msg"
+   _t "$msg" ship
    _t "$msg" ship new foo
    _t "$msg" ship new foo bar
    _t "$msg" ship foo move 10 20

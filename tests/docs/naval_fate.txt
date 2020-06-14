@@ -2,6 +2,7 @@ Naval Fate.
 
 Usage:
   naval_fate [options]
+  naval_fate ship
   naval_fate ship new <name>...
   naval_fate ship <name> move <x> <y> [--speed=<kn>]
   naval_fate ship shoot <x> <y>
