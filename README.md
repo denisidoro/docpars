@@ -48,7 +48,7 @@ fi
 
 Motivation
 ------------
-The [default implementation](https://github.com/docopt/docopts) of docopt for shell scripts use Python under the hood. You may want to use *docpars* instead in the following scenarios
+The [default implementation](https://github.com/docopt/docopts) of docopt for shell scripts uses Python under the hood. You may want to use *docpars* instead in the following scenarios
 
 ### You don't want to install Python
 
