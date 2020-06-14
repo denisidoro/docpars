@@ -3,15 +3,15 @@
 DOTFILES_COMMIT_HASH="bc74f8"
 
 dot::clone() {
-    git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
-    cd "$DOTFILES" && git checkout "$DOTFILES_COMMIT_HASH"
+   git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
+   cd "$DOTFILES" && git checkout "$DOTFILES_COMMIT_HASH"
 }
 
 dot::install_if_necessary() {
-    [ -n "${DOTFILES:-}" ] && return
-    export DOTFILES="${DOCPARS_HOME}/dotfiles"
-    export PATH="${DOTFILES}/bin:${PATH}"
-    $(dot::clone 2>/dev/null || true)
+   [ -n "${DOTFILES:-}" ] && return
+   export DOTFILES="${DOCPARS_HOME}/dotfiles"
+   export PATH="${DOTFILES}/bin:${PATH}"
+   $(dot::clone 2>/dev/null || true)
 }
 
 parse::python() {
@@ -37,8 +37,10 @@ fixture::get() {
 }
 
 export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
+export PYTHONDONTWRITEBYTECODE=x
 
 dot::install_if_necessary
+source "${DOTFILES}/scripts/core/main.sh"
 
 export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
 export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"

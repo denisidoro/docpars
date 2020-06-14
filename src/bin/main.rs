@@ -3,7 +3,7 @@ use std::env;
 use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut args = env::args();
-    docpars::gen_eval_string(&mut args)?;
+    let argv: Vec<String> = env::args().skip(1).collect();
+    docpars::gen_eval_string(&argv)?;
     Ok(())
 }

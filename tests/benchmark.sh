@@ -6,19 +6,23 @@ _msg() {
    fixture::get "naval_fate"
 }
 
-_one_bench() {
-   local -r msg="$1"
-   local -r bin="$2"
-   hyperfine "$bin -h \"$msg\" : ship new foo" --warmup 3
-}
-
 _benchmark() {
+   local -r bin="$1"
    local -r msg="$(_msg)"
-   _one_bench "$msg" "$DOCOPT_BIN"
-   _one_bench "$msg" "$DOCPARS_BIN"
+
+   rm -rf "${DOTFILES}/scripts/__pycache__" 2>/dev/null | true
+   local -r res="$(hyperfine --warmup 1 "$bin -h \"$msg\" : mine remove 2 4 --moored" | grep -E 'Time|Range')"
+   echo "$res"
+
+   [[ "$bin" = *docpars* ]] || return 0
+
+   local -r millis="$(echo "$res" | grep -m1 -Eo '[0-9]+' | head -n1)"
+   [[ "$millis" -gt 25 ]] && return 1 || true
 }
 
 test::set_suite "benchmark"
 fn=test::skip
 platform::command_exists hyperfine && fn=test::run
-$fn "time" _benchmark
+
+$fn "$DOCOPT_BIN" _benchmark "$DOCOPT_BIN"
+$fn "$DOCPARS_BIN" _benchmark "$DOCPARS_BIN"
