@@ -79,7 +79,7 @@ cargo install docpars
 
 ### Downloading pre-compiled binaries
 
-You can download built binaries [here](https://github.com/denisidoro/docpars/releases/latest).
+You can download binaries [here](https://github.com/denisidoro/docpars/releases/latest).
 
 They are available for OSX, Android and Linux with ARM and x86_64 variants.
 
