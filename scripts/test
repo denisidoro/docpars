@@ -21,7 +21,7 @@ _create_dotrs_fallback() {
 dotrs="${DOTFILES}/target/dotrs"
 [ -f $dotrs ] || _create_dotrs_fallback
 
-dot sh scripting test "${DOCPARS_HOME}/tests"
+dot shell test "${DOCPARS_HOME}/tests"
 
 export DOT_DOCOPT="$DOCPARS_BIN"
 dot self test file '^bash \- help'
