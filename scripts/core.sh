@@ -16,7 +16,7 @@ dot::clone() {
 
 dot::clone_if_necessary() {
   [ -n "${DOTFILES:-}" ] && [ -x "${DOTFILES}/bin/dot" ] && return
-  export DOTFILES="${NAVI_HOME}/target/dotfiles"
+  export DOTFILES="${DOCPARS_HOME}/target/dotfiles"
   dot::clone
 }
 
