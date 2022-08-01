@@ -76,10 +76,9 @@ DOCPARSEOF
                 .unwrap_or_else(|e| {
                     if e.fatal() {
                         println!("exit 1");
-                        e.exit();
                     } else {
-                        e.exit();
                     }
+                    e.exit();
                 });
 
             for (k, v) in parsed_args.map.iter() {
