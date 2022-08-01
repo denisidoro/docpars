@@ -20,7 +20,6 @@ dot::clone_if_necessary() {
   dot::clone
 }
 
-dot::clone_if_necessary
 parse::python() {
    local -r msg="$1"
    shift
@@ -43,13 +42,13 @@ fixture::get() {
    cat "${DOCPARS_HOME}/tests/docs/${1}.txt"
 }
 
-export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
 export PYTHONDONTWRITEBYTECODE=x
 
 dot::clone_if_necessary
 source "${DOTFILES}/scripts/core/main.sh"
 
 export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
+
 export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"
 [ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/target/debug/docpars"
 [ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/scripts/run"
