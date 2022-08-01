@@ -3,8 +3,8 @@ use docopt::Value::{self, Counted, List, Plain, Switch};
 use std::error::Error;
 
 fn key_string(x: &str) -> &str {
-    if x.starts_with("--") {
-        &x[2..]
+    if let Some(prefixed) = x.strip_prefix("--") {
+        prefixed
     } else if x.starts_with('<') {
         let l = x.len();
         &x[1..(l - 1)]
@@ -25,7 +25,7 @@ fn value_string(x: &Value) -> String {
             let mut s = String::from("(");
             let quoted_values: Vec<String> = v.iter().map(|y| format!("'{}'", y)).collect();
             s.push_str(&quoted_values.join(" "));
-            s.push_str(")");
+            s.push(')');
             s
         }
     }
