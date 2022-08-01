@@ -47,11 +47,10 @@ fn get_data(argv: &[String]) -> Result<Data, Box<dyn Error>> {
         Some("--help") | Some("-h") => {}
         _ => return Ok(Data::Unknown),
     }
-    let help_msg: String;
-    match argv.get(1) {
-        Some(msg) => help_msg = msg.to_owned(),
+    let help_msg = match argv.get(1) {
+        Some(msg) => msg.to_owned(),
         _ => return Ok(Data::Unknown),
-    }
+    };
     match argv.get(2).as_ref().map(|s| s.as_str()) {
         Some(":") => {}
         _ => return Ok(Data::Unknown),
@@ -87,7 +86,7 @@ DOCPARSEOF
                 });
 
             for (k, v) in parsed_args.map.iter() {
-                println!("{}={}", key_string(k).replace("-", "_"), value_string(v));
+                println!("{}={}", key_string(k).replace('-', "_"), value_string(v));
             }
         }
         _ => {
