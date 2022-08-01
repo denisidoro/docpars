@@ -22,7 +22,7 @@ _benchmark() {
 
 test::set_suite "benchmark"
 fn=test::skip
-platform::command_exists hyperfine && fn=test::run
+has hyperfine && fn=test::run
 
 $fn "$DOCOPT_BIN" _benchmark "$DOCOPT_BIN"
 $fn "$DOCPARS_BIN" _benchmark "$DOCPARS_BIN"

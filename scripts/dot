@@ -2,4 +2,6 @@
 set -euo pipefail
 
 export DOCPARS_HOME="$(cd "$(dirname "$0")/.." && pwd)"
-"${DOCPARS_HOME}/scripts/run" "$@"
+source "${DOCPARS_HOME}/scripts/core.sh"
+
+"${DOTFILES}/bin/dot" "$@"

@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
 
-DOTFILES_COMMIT_HASH="bc74f8"
+export PROJ_HOME="$DOCPARS_HOME"
+export PROJ_NAME="docpars"
+export CARGO_PATH="${DOCPARS_HOME}/core/Cargo.toml"
+
+# TODO: bump dotfiles + remove this fn
+log::note() { log::info "$@"; }
+export -f log::note
 
 dot::clone() {
-   git clone "https://github.com/denisidoro/dotfiles.git" "$DOTFILES"
-   cd "$DOTFILES" && git checkout "$DOTFILES_COMMIT_HASH"
+  git clone 'https://github.com/denisidoro/dotfiles' "$DOTFILES"
+  cd "$DOTFILES"
+  git checkout 'v2022.07.16'
 }
 
-dot::install_if_necessary() {
-   [ -n "${DOTFILES:-}" ] && return
-   export DOTFILES="${DOCPARS_HOME}/dotfiles"
-   export PATH="${DOTFILES}/bin:${PATH}"
-   $(dot::clone 2>/dev/null || true)
+dot::clone_if_necessary() {
+  [ -n "${DOTFILES:-}" ] && [ -x "${DOTFILES}/bin/dot" ] && return
+  export DOTFILES="${DOCPARS_HOME}/target/dotfiles"
+  dot::clone
 }
 
 parse::python() {
@@ -36,13 +42,13 @@ fixture::get() {
    cat "${DOCPARS_HOME}/tests/docs/${1}.txt"
 }
 
-export DOCPARS_HOME="${DOCPARS_HOME:-$(cd "$(dirname "$0")/.." && pwd)}"
 export PYTHONDONTWRITEBYTECODE=x
 
-dot::install_if_necessary
+dot::clone_if_necessary
 source "${DOTFILES}/scripts/core/main.sh"
 
 export DOCOPT_BIN="${DOTFILES}/scripts/core/docopts"
+
 export DOCPARS_BIN="${DOCPARS_HOME}/target/release/docpars"
 [ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/target/debug/docpars"
 [ -f "$DOCPARS_BIN" ] || export DOCPARS_BIN="${DOCPARS_HOME}/scripts/run"
