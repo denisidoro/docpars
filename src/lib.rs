@@ -13,17 +13,22 @@ fn key_string(x: &str) -> &str {
     }
 }
 
+fn escape_quote(x: &str) -> String {
+    x.replace('\'', "'\\''")
+}
+
 fn value_string(x: &Value) -> String {
     match x {
         Switch(b) => format!("{}", b),
         Counted(n) => format!("'{}'", n),
         Plain(o) => match o {
-            Some(y) => format!("'{}'", y),
+            Some(y) => format!("'{}'", escape_quote(y)),
             None => "".to_owned(),
         },
         List(v) => {
             let mut s = String::from("(");
-            let quoted_values: Vec<String> = v.iter().map(|y| format!("'{}'", y)).collect();
+            let quoted_values: Vec<String> =
+                v.iter().map(|y| format!("'{}'", escape_quote(y))).collect();
             s.push_str(&quoted_values.join(" "));
             s.push(')');
             s

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-export DOCPARS_HOME="$(cd "$(dirname "$0")/.." && pwd)"
 export PROJ_HOME="$DOCPARS_HOME"
 export PROJ_NAME="docpars"
 export CARGO_PATH="${DOCPARS_HOME}/core/Cargo.toml"

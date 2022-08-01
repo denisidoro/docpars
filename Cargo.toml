@@ -1,6 +1,6 @@
 [package]
 name = "docpars"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Denis Isidoro <denis_isidoro@live.com>"]
 edition = "2018"
 description = "Ultra-fast parser for declarative command-line options"
@@ -12,7 +12,7 @@ categories = ["command-line-utilities"]
 license = "Apache-2.0"
 
 [dependencies]
-docopt = "1.1.0"
+docopt = "1.1.1"
 
 [lib]
 name = "docpars"
